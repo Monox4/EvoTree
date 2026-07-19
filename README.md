@@ -18,11 +18,8 @@ Then open the local URL Vite prints (usually http://localhost:5173).
 
 ```bash
 npm run build
-npm run preview   # sanity-check the production build locally
+npm run preview  
 ```
-
-The build output lands in `dist/` — deploy that folder to Vercel, Netlify,
-or any static host.
 
 ## Project structure
 
@@ -39,15 +36,3 @@ src/
   App.jsx                  — ties it all together
   styles.css                — beige/brown phylogenetic-tree theme
 ```
-
-## Notes for next steps
-
-- `treeData.js` is currently hand-typed. For real scale, swap this for a
-  fetch from the Open Tree of Life API or a Wikidata SPARQL query, or move
-  it into a small database/CMS so it's editable without redeploying.
-- The Wikipedia fetch is client-side and uncached across sessions — for
-  production traffic you'd want a small server-side cache/proxy so you're
-  not hammering Wikipedia's API on every visitor's every hover.
-- Layout is currently recomputed fully on every expand/collapse. Fine at
-  this scale; if the tree grows into the hundreds/thousands of nodes,
-  consider `d3-hierarchy` for layout and virtualizing off-screen nodes.
