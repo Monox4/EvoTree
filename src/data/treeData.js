@@ -1,21 +1,4 @@
-// ---------------------------------------------------------------
-// DATA — hybrid sourcing:
-//   • Fossil/transitional "trunk" nodes (Tiktaalik, Ichthyostega,
-//     Eryops, Hylonomus, Dimetrodon, Morganucodon, Tyrannosaurus)
-//     are hand-curated from Wikipedia, since these precisely-dated
-//     transitional taxa aren't placed in Open Tree of Life's
-//     synthesis tree (OToL flags Tiktaalik itself as suppressed
-//     from synthesis — no confident phylogenetic placement yet).
-//   • Living-species branches (marked `clade: true` at their
-//     internal branch points) use REAL topology pulled from the
-//     Open Tree of Life API (tree_of_life/induced_subtree) for the
-//     11 living species in this tree, so those branchings reflect
-//     actual published phylogenetic literature rather than guesses.
-//   • Nodes labelled "Unknown ancestor" are real divergence points
-//     OToL's synthesis didn't assign a single formal clade name to.
-// This remains a curated illustrative tree, not an exhaustive
-// cladogram — see README for how to extend it further.
-// ---------------------------------------------------------------
+
 export const tree = {
   id: 'tiktaalik',
   common: 'Tiktaalik',
@@ -137,16 +120,62 @@ export const tree = {
                           extinct: true,
                           wiki: 'Tyrannosaurus',
                           children: [
-                            { id: 'gallus', common: 'Red junglefowl', sci: 'Gallus gallus', era: 'present', desc: 'A forest bird of South and Southeast Asia and the wild ancestor of the domestic chicken — a living descendant of the theropod dinosaur lineage.', extinct: false, wiki: 'Red_junglefowl', children: [] },
+                            {
+                              id: 'clade_aves',
+                              common: 'Aves',
+                              sci: 'Aves',
+                              era: 'clade · birds',
+                              desc: 'The only surviving dinosaur lineage — around 11,000 living species descended from small feathered theropods.',
+                              extinct: false,
+                              clade: true,
+                              wiki: 'Bird',
+                              children: [
+                                { id: 'gallus', common: 'Red junglefowl', sci: 'Gallus gallus', era: 'present', desc: 'A forest bird of South and Southeast Asia and the wild ancestor of the domestic chicken.', extinct: false, wiki: 'Red_junglefowl', children: [] },
+                                { id: 'sparrow', common: 'House sparrow', sci: 'Passer domesticus', era: 'present', desc: 'One of the most widely distributed wild birds on Earth, closely associated with human settlements on every continent except Antarctica.', extinct: false, wiki: 'House_sparrow', children: [] },
+                                { id: 'mallard', common: 'Mallard', sci: 'Anas platyrhynchos', era: 'present', desc: 'The most common and widespread duck in the Northern Hemisphere, and the wild ancestor of most domestic duck breeds.', extinct: false, wiki: 'Mallard', children: [] },
+                              ],
+                            },
                           ],
                         },
-                        { id: 'crocodylus', common: 'Nile crocodile', sci: 'Crocodylus niloticus', era: 'present', desc: 'A large African crocodilian, among the closest living relatives of birds through a shared archosaur ancestry.', extinct: false, wiki: 'Nile_crocodile', children: [] },
+                        {
+                          id: 'clade_crocodilia',
+                          common: 'Crocodilia',
+                          sci: 'Crocodilia',
+                          era: 'clade · crocodilians',
+                          desc: 'Large semi-aquatic reptiles including crocodiles, alligators, caimans and gharials — the closest living relatives of birds.',
+                          extinct: false,
+                          clade: true,
+                          wiki: 'Crocodilia',
+                          children: [
+                            { id: 'crocodylus', common: 'Nile crocodile', sci: 'Crocodylus niloticus', era: 'present', desc: 'A large African crocodilian, among the closest living relatives of birds through a shared archosaur ancestry.', extinct: false, wiki: 'Nile_crocodile', children: [] },
+                            { id: 'saltwater_croc', common: 'Saltwater crocodile', sci: 'Crocodylus porosus', era: 'present', desc: 'The largest living reptile, found from India to Australia, capable of tolerating both fresh and salt water.', extinct: false, wiki: 'Saltwater_crocodile', children: [] },
+                            { id: 'alligator', common: 'American alligator', sci: 'Alligator mississippiensis', era: 'present', desc: 'A large alligator native to the southeastern United States, a conservation success story after near-extinction in the 20th century.', extinct: false, wiki: 'American_alligator', children: [] },
+                          ],
+                        },
                       ],
                     },
-                    { id: 'chelonia', common: 'Green sea turtle', sci: 'Chelonia mydas', era: 'present · endangered', desc: 'A large sea turtle found in tropical and subtropical oceans worldwide, named for the greenish colour of its fat.', extinct: false, wiki: 'Green_sea_turtle', children: [] },
+                    {
+                      id: 'clade_testudines',
+                      common: 'Testudines',
+                      sci: 'Testudines',
+                      era: 'clade · turtles & tortoises',
+                      desc: 'Reptiles whose ribs evolved into a protective shell, among the longest-lived vertebrate lineages on Earth.',
+                      extinct: false,
+                      clade: true,
+                      wiki: 'Turtle',
+                      children: [
+                        { id: 'chelonia', common: 'Green sea turtle', sci: 'Chelonia mydas', era: 'present · endangered', desc: 'A large sea turtle found in tropical and subtropical oceans worldwide, named for the greenish colour of its fat.', extinct: false, wiki: 'Green_sea_turtle', children: [] },
+                        { id: 'leatherback', common: 'Leatherback sea turtle', sci: 'Dermochelys coriacea', era: 'present · vulnerable', desc: 'The largest living turtle, with a flexible, leathery shell instead of a hard one, capable of diving deeper than almost any other marine reptile.', extinct: false, wiki: 'Leatherback_sea_turtle', children: [] },
+                        { id: 'loggerhead', common: 'Loggerhead sea turtle', sci: 'Caretta caretta', era: 'present · vulnerable', desc: 'Named for its unusually large head, found in oceans worldwide and known for long transoceanic migrations.', extinct: false, wiki: 'Loggerhead_sea_turtle', children: [] },
+                      ],
+                    },
                   ],
                 },
-                { id: 'varanus', common: 'Komodo dragon', sci: 'Varanus komodoensis', era: 'present · vulnerable', desc: 'The largest living lizard, found only on a few Indonesian islands, capable of taking down prey much larger than itself.', extinct: false, wiki: 'Komodo_dragon', children: [] },
+                { id: 'clade_squamata', common: 'Squamata', sci: 'Squamata', era: 'clade · lizards & snakes', desc: 'The largest reptile order, over 10,000 species, including all lizards and snakes.', extinct: false, clade: true, wiki: 'Squamata', children: [
+                  { id: 'varanus', common: 'Komodo dragon', sci: 'Varanus komodoensis', era: 'present · vulnerable', desc: 'The largest living lizard, found only on a few Indonesian islands, capable of taking down prey much larger than itself.', extinct: false, wiki: 'Komodo_dragon', children: [] },
+                  { id: 'king_cobra', common: 'King cobra', sci: 'Ophiophagus hannah', era: 'present · vulnerable', desc: "The world's longest venomous snake, found across South and Southeast Asia, and the only snake known to build a nest for its eggs.", extinct: false, wiki: 'King_cobra', children: [] },
+                  { id: 'anaconda', common: 'Green anaconda', sci: 'Eunectes murinus', era: 'present', desc: "One of the heaviest snakes in the world, a non-venomous constrictor found in South America's swamps and rivers.", extinct: false, wiki: 'Green_anaconda', children: [] },
+                ] },
               ],
             },
             {
@@ -250,7 +279,21 @@ export const tree = {
                                     { id: 'macaque', common: 'Rhesus macaque', sci: 'Macaca mulatta', era: 'present', desc: 'One of the best-studied primates in biomedical research, native to South, Central and Southeast Asia, representing the Old World monkeys.', extinct: false, wiki: 'Rhesus_macaque', children: [] },
                                   ],
                                 },
-                                { id: 'lemur', common: 'Ring-tailed lemur', sci: 'Lemur catta', era: 'present · endangered', desc: 'A primate endemic to Madagascar, representative of the earliest-branching living primate lineages.', extinct: false, wiki: 'Ring-tailed_lemur', children: [] },
+                                {
+                                  id: 'clade_strepsirrhini',
+                                  common: 'Strepsirrhini',
+                                  sci: 'Strepsirrhini',
+                                  era: 'clade · lemurs, lorises & galagos',
+                                  desc: 'The primate suborder retaining ancestral traits like a wet nose (rhinarium), including lemurs, lorises, and galagos.',
+                                  extinct: false,
+                                  clade: true,
+                                  wiki: 'Strepsirrhini',
+                                  children: [
+                                    { id: 'lemur', common: 'Ring-tailed lemur', sci: 'Lemur catta', era: 'present · endangered', desc: 'A primate endemic to Madagascar, representative of the earliest-branching living primate lineages.', extinct: false, wiki: 'Ring-tailed_lemur', children: [] },
+                                    { id: 'aye_aye', common: 'Aye-aye', sci: 'Daubentonia madagascariensis', era: 'present · endangered', desc: 'A highly unusual nocturnal lemur from Madagascar with a thin, elongated middle finger used to fish larvae out of tree bark.', extinct: false, wiki: 'Aye-aye', children: [] },
+                                    { id: 'slow_loris', common: 'Slow loris', sci: 'Nycticebus coucang', era: 'present · vulnerable', desc: 'A slow-moving, nocturnal primate from Southeast Asia — one of the very few venomous mammals known.', extinct: false, wiki: 'Sunda_slow_loris', children: [] },
+                                  ],
+                                },
                               ],
                             },
                             {
@@ -304,15 +347,56 @@ export const tree = {
                                     },
                                   ],
                                 },
-                                { id: 'lion', common: 'Lion', sci: 'Panthera leo', era: 'present · vulnerable', desc: 'A large carnivoran found mainly in sub-Saharan Africa, unified with other carnivorans by specialised shearing teeth.', extinct: false, wiki: 'Lion', children: [] },
+                                {
+                                  id: 'clade_carnivora',
+                                  common: 'Carnivora',
+                                  sci: 'Carnivora',
+                                  era: 'clade · carnivorans',
+                                  desc: 'A mammal order unified by specialised shearing teeth (carnassials), including cats, dogs, bears and their relatives.',
+                                  extinct: false,
+                                  clade: true,
+                                  wiki: 'Carnivora',
+                                  children: [
+                                    { id: 'lion', common: 'Lion', sci: 'Panthera leo', era: 'present · vulnerable', desc: 'A large carnivoran found mainly in sub-Saharan Africa, notable for its highly social pride structure.', extinct: false, wiki: 'Lion', children: [] },
+                                    { id: 'tiger', common: 'Tiger', sci: 'Panthera tigris', era: 'present · endangered', desc: 'The largest living cat species, found across fragmented habitats from India to the Russian Far East.', extinct: false, wiki: 'Tiger', children: [] },
+                                    { id: 'wolf', common: 'Gray wolf', sci: 'Canis lupus', era: 'present', desc: 'The largest wild canid, ancestor of the domestic dog, once the most widely distributed mammal in the world.', extinct: false, wiki: 'Wolf', children: [] },
+                                  ],
+                                },
                               ],
                             },
                           ],
                         },
-                        { id: 'kangaroo', common: 'Eastern grey kangaroo', sci: 'Macropus giganteus', era: 'present', desc: 'A large pouched marsupial from eastern Australia.', extinct: false, wiki: 'Eastern_grey_kangaroo', children: [] },
+                        {
+                          id: 'clade_marsupialia',
+                          common: 'Marsupialia',
+                          sci: 'Marsupialia',
+                          era: 'clade · marsupials',
+                          desc: 'Pouched mammals whose young are born at an early developmental stage and complete development attached to a teat, often within a pouch.',
+                          extinct: false,
+                          clade: true,
+                          wiki: 'Marsupial',
+                          children: [
+                            { id: 'kangaroo', common: 'Eastern grey kangaroo', sci: 'Macropus giganteus', era: 'present', desc: 'A large pouched marsupial from eastern Australia.', extinct: false, wiki: 'Eastern_grey_kangaroo', children: [] },
+                            { id: 'tasmanian_devil', common: 'Tasmanian devil', sci: 'Sarcophilus harrisii', era: 'present · endangered', desc: 'The largest living carnivorous marsupial, now found only in the wild on the island of Tasmania, threatened by a transmissible facial tumour disease.', extinct: false, wiki: 'Tasmanian_devil', children: [] },
+                            { id: 'opossum', common: 'Virginia opossum', sci: 'Didelphis virginiana', era: 'present', desc: "North America's only native marsupial, known for 'playing dead' as a defence and unusually strong disease resistance.", extinct: false, wiki: 'Virginia_opossum', children: [] },
+                          ],
+                        },
                       ],
                     },
-                    { id: 'platypus', common: 'Platypus', sci: 'Ornithorhynchus anatinus', era: 'present', desc: 'An egg-laying, venomous, duck-billed mammal from eastern Australia — the most basal living mammal lineage.', extinct: false, wiki: 'Platypus', children: [] },
+                    {
+                      id: 'clade_monotremata',
+                      common: 'Monotremata',
+                      sci: 'Monotremata',
+                      era: 'clade · monotremes',
+                      desc: 'The only egg-laying mammals alive today — just five living species in total: the platypus and four echidna species.',
+                      extinct: false,
+                      clade: true,
+                      wiki: 'Monotreme',
+                      children: [
+                        { id: 'platypus', common: 'Platypus', sci: 'Ornithorhynchus anatinus', era: 'present', desc: 'An egg-laying, venomous, duck-billed mammal from eastern Australia — the most basal living mammal lineage.', extinct: false, wiki: 'Platypus', children: [] },
+                        { id: 'echidna', common: 'Short-beaked echidna', sci: 'Tachyglossus aculeatus', era: 'present', desc: 'A spiny, egg-laying mammal found across Australia and New Guinea, one of only five living monotreme species.', extinct: false, wiki: 'Short-beaked_echidna', children: [] },
+                      ],
+                    },
                   ],
                 },
               ],
