@@ -1,4 +1,21 @@
-
+// ---------------------------------------------------------------
+// DATA — hybrid sourcing:
+//   • Fossil/transitional "trunk" nodes (Tiktaalik, Ichthyostega,
+//     Eryops, Hylonomus, Dimetrodon, Morganucodon, Tyrannosaurus)
+//     are hand-curated from Wikipedia, since these precisely-dated
+//     transitional taxa aren't placed in Open Tree of Life's
+//     synthesis tree (OToL flags Tiktaalik itself as suppressed
+//     from synthesis — no confident phylogenetic placement yet).
+//   • Living-species branches (marked `clade: true` at their
+//     internal branch points) use REAL topology pulled from the
+//     Open Tree of Life API (tree_of_life/induced_subtree) for the
+//     11 living species in this tree, so those branchings reflect
+//     actual published phylogenetic literature rather than guesses.
+//   • Nodes labelled "Unknown ancestor" are real divergence points
+//     OToL's synthesis didn't assign a single formal clade name to.
+// This remains a curated illustrative tree, not an exhaustive
+// cladogram — see README for how to extend it further.
+// ---------------------------------------------------------------
 export const tree = {
   id: 'tiktaalik',
   common: 'Tiktaalik',
@@ -231,6 +248,8 @@ export const tree = {
                             { id: 'crocodylus', common: 'Nile crocodile', sci: 'Crocodylus niloticus', era: 'present', desc: 'A large African crocodilian, among the closest living relatives of birds through a shared archosaur ancestry.', extinct: false, wiki: 'Nile_crocodile', children: [] },
                             { id: 'saltwater_croc', common: 'Saltwater crocodile', sci: 'Crocodylus porosus', era: 'present', desc: 'The largest living reptile, found from India to Australia, capable of tolerating both fresh and salt water.', extinct: false, wiki: 'Saltwater_crocodile', children: [] },
                             { id: 'alligator', common: 'American alligator', sci: 'Alligator mississippiensis', era: 'present', desc: 'A large alligator native to the southeastern United States, a conservation success story after near-extinction in the 20th century.', extinct: false, wiki: 'American_alligator', children: [] },
+                            { id: 'gharial', common: 'Gharial', sci: 'Gavialis gangeticus', era: 'present · critically endangered', desc: 'A fish-eating crocodilian from the Indian subcontinent with an extremely long, narrow snout, distinct enough to sit in its own family.', extinct: false, wiki: 'Gharial', children: [] },
+                            { id: 'caiman', common: 'Spectacled caiman', sci: 'Caiman crocodilus', era: 'present', desc: 'The most widespread crocodilian in the Americas, named for the bony ridge between its eyes that resembles spectacles.', extinct: false, wiki: 'Spectacled_caiman', children: [] },
                           ],
                         },
                       ],
@@ -248,15 +267,32 @@ export const tree = {
                         { id: 'chelonia', common: 'Green sea turtle', sci: 'Chelonia mydas', era: 'present · endangered', desc: 'A large sea turtle found in tropical and subtropical oceans worldwide, named for the greenish colour of its fat.', extinct: false, wiki: 'Green_sea_turtle', children: [] },
                         { id: 'leatherback', common: 'Leatherback sea turtle', sci: 'Dermochelys coriacea', era: 'present · vulnerable', desc: 'The largest living turtle, with a flexible, leathery shell instead of a hard one, capable of diving deeper than almost any other marine reptile.', extinct: false, wiki: 'Leatherback_sea_turtle', children: [] },
                         { id: 'loggerhead', common: 'Loggerhead sea turtle', sci: 'Caretta caretta', era: 'present · vulnerable', desc: 'Named for its unusually large head, found in oceans worldwide and known for long transoceanic migrations.', extinct: false, wiki: 'Loggerhead_sea_turtle', children: [] },
+                        { id: 'galapagos_tortoise', common: 'Galápagos tortoise', sci: 'Chelonoidis niger', era: 'present · vulnerable', desc: 'The largest living tortoise species, found only on the Galápagos Islands, with individuals known to live well over 100 years.', extinct: false, wiki: 'Galápagos_tortoise', children: [] },
+                        { id: 'snapping_turtle', common: 'Common snapping turtle', sci: 'Chelydra serpentina', era: 'present', desc: 'A large freshwater turtle native to North America, known for its powerful bite and highly reduced, cross-shaped plastron.', extinct: false, wiki: 'Common_snapping_turtle', children: [] },
                       ],
                     },
                   ],
                 },
-                { id: 'clade_squamata', common: 'Squamata', sci: 'Squamata', era: 'clade · lizards & snakes', desc: 'The largest reptile order, over 10,000 species, including all lizards and snakes.', extinct: false, clade: true, wiki: 'Squamata', children: [
-                  { id: 'varanus', common: 'Komodo dragon', sci: 'Varanus komodoensis', era: 'present · vulnerable', desc: 'The largest living lizard, found only on a few Indonesian islands, capable of taking down prey much larger than itself.', extinct: false, wiki: 'Komodo_dragon', children: [] },
-                  { id: 'king_cobra', common: 'King cobra', sci: 'Ophiophagus hannah', era: 'present · vulnerable', desc: "The world's longest venomous snake, found across South and Southeast Asia, and the only snake known to build a nest for its eggs.", extinct: false, wiki: 'King_cobra', children: [] },
-                  { id: 'anaconda', common: 'Green anaconda', sci: 'Eunectes murinus', era: 'present', desc: "One of the heaviest snakes in the world, a non-venomous constrictor found in South America's swamps and rivers.", extinct: false, wiki: 'Green_anaconda', children: [] },
-                ] },
+                {
+                  id: 'clade_lepidosauria',
+                  common: 'Lepidosauria',
+                  sci: 'Lepidosauria',
+                  era: 'clade · scaled reptiles',
+                  desc: 'The reptile lineage uniting Squamata (lizards & snakes) with the much smaller sister group Rhynchocephalia — today represented by a single living species, the tuatara.',
+                  extinct: false,
+                  clade: true,
+                  wiki: 'Lepidosauria',
+                  children: [
+                    { id: 'clade_squamata', common: 'Squamata', sci: 'Squamata', era: 'clade · lizards & snakes', desc: 'The largest reptile order, over 10,000 species, including all lizards and snakes.', extinct: false, clade: true, wiki: 'Squamata', children: [
+                      { id: 'varanus', common: 'Komodo dragon', sci: 'Varanus komodoensis', era: 'present · vulnerable', desc: 'The largest living lizard, found only on a few Indonesian islands, capable of taking down prey much larger than itself.', extinct: false, wiki: 'Komodo_dragon', children: [] },
+                      { id: 'water_monitor', common: 'Asian water monitor', sci: 'Varanus salvator', era: 'present', desc: 'One of the most widespread monitor lizards, found across South and Southeast Asia, highly adaptable to human-altered environments.', extinct: false, wiki: 'Asian_water_monitor', children: [] },
+                      { id: 'green_iguana', common: 'Green iguana', sci: 'Iguana iguana', era: 'present', desc: 'A large arboreal lizard native to Central and South America, one of the most recognisable lizards in the world and popular in the pet trade.', extinct: false, wiki: 'Green_iguana', children: [] },
+                      { id: 'king_cobra', common: 'King cobra', sci: 'Ophiophagus hannah', era: 'present · vulnerable', desc: "The world's longest venomous snake, found across South and Southeast Asia, and the only snake known to build a nest for its eggs.", extinct: false, wiki: 'King_cobra', children: [] },
+                      { id: 'anaconda', common: 'Green anaconda', sci: 'Eunectes murinus', era: 'present', desc: "One of the heaviest snakes in the world, a non-venomous constrictor found in South America's swamps and rivers.", extinct: false, wiki: 'Green_anaconda', children: [] },
+                    ] },
+                    { id: 'tuatara', common: 'Tuatara', sci: 'Sphenodon punctatus', era: 'present · vulnerable', desc: "New Zealand's living fossil — the sole surviving species of an entire reptile order (Rhynchocephalia) that was far more diverse over 200 million years ago, alongside the earliest dinosaurs.", extinct: false, wiki: 'Tuatara', children: [] },
+                  ],
+                },
               ],
             },
             {
