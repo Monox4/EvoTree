@@ -1,21 +1,3 @@
-// ---------------------------------------------------------------
-// DATA — hybrid sourcing:
-//   • Fossil/transitional "trunk" nodes (Tiktaalik, Ichthyostega,
-//     Eryops, Hylonomus, Dimetrodon, Morganucodon, Tyrannosaurus)
-//     are hand-curated from Wikipedia, since these precisely-dated
-//     transitional taxa aren't placed in Open Tree of Life's
-//     synthesis tree (OToL flags Tiktaalik itself as suppressed
-//     from synthesis — no confident phylogenetic placement yet).
-//   • Living-species branches (marked `clade: true` at their
-//     internal branch points) use REAL topology pulled from the
-//     Open Tree of Life API (tree_of_life/induced_subtree) for the
-//     11 living species in this tree, so those branchings reflect
-//     actual published phylogenetic literature rather than guesses.
-//   • Nodes labelled "Unknown ancestor" are real divergence points
-//     OToL's synthesis didn't assign a single formal clade name to.
-// This remains a curated illustrative tree, not an exhaustive
-// cladogram — see README for how to extend it further.
-// ---------------------------------------------------------------
 export const tree = {
   id: 'tiktaalik',
   common: 'Tiktaalik',
@@ -334,6 +316,16 @@ export const tree = {
                           wiki: 'Boreoeutheria',
                           children: [
                             {
+                              id: 'clade_euarchontoglires',
+                              common: 'Euarchontoglires',
+                              sci: 'Euarchontoglires',
+                              era: 'clade · primates, rodents & relatives',
+                              desc: 'A major placental mammal clade uniting Primates with Rodentia (and rabbits, tree shrews, colugos), grouped together primarily on genetic evidence.',
+                              extinct: false,
+                              clade: true,
+                              wiki: 'Euarchontoglires',
+                              children: [
+                                {
                               id: 'clade_primates',
                               common: 'Primates',
                               sci: 'Primates',
@@ -397,6 +389,23 @@ export const tree = {
                                   ],
                                 },
                                 {
+                                  id: 'clade_platyrrhini',
+                                  common: 'Platyrrhini',
+                                  sci: 'Platyrrhini',
+                                  era: 'clade · New World monkeys',
+                                  desc: 'Monkeys native to Central and South America, distinguished from Old World monkeys by flatter noses with outward-facing nostrils, and often by prehensile tails.',
+                                  extinct: false,
+                                  clade: true,
+                                  wiki: 'New_World_monkey',
+                                  children: [
+                                    { id: 'marmoset', common: 'Common marmoset', sci: 'Callithrix jacchus', era: 'present', desc: 'A small monkey native to northeastern Brazil, among the smallest primates, notable for regularly giving birth to twins.', extinct: false, wiki: 'Common_marmoset', children: [] },
+                                    { id: 'tamarin', common: 'Golden lion tamarin', sci: 'Leontopithecus rosalia', era: 'present · endangered', desc: 'A small, strikingly orange-maned monkey from Brazil\u2019s Atlantic Forest, once down to a few hundred individuals before a major conservation recovery.', extinct: false, wiki: 'Golden_lion_tamarin', children: [] },
+                                    { id: 'squirrel_monkey', common: 'Black-capped squirrel monkey', sci: 'Saimiri boliviensis', era: 'present', desc: 'A small, highly social South American monkey living in some of the largest groups of any primate, sometimes numbering over 100 individuals.', extinct: false, wiki: 'Black-capped_squirrel_monkey', children: [] },
+                                    { id: 'capuchin', common: 'White-headed capuchin', sci: 'Cebus capucinus', era: 'present', desc: 'A highly intelligent Central and South American monkey known for tool use, including cracking nuts and shellfish with stones.', extinct: false, wiki: 'White-headed_capuchin', children: [] },
+                                    { id: 'spider_monkey', common: "Geoffroy's spider monkey", sci: 'Ateles geoffroyi', era: 'present · endangered', desc: 'A large, long-limbed Central American monkey with a fully prehensile tail strong enough to support its whole body weight.', extinct: false, wiki: "Geoffroy's_spider_monkey", children: [] },
+                                  ],
+                                },
+                                {
                                   id: 'clade_strepsirrhini',
                                   common: 'Strepsirrhini',
                                   sci: 'Strepsirrhini',
@@ -409,6 +418,25 @@ export const tree = {
                                     { id: 'lemur', common: 'Ring-tailed lemur', sci: 'Lemur catta', era: 'present · endangered', desc: 'A primate endemic to Madagascar, representative of the earliest-branching living primate lineages.', extinct: false, wiki: 'Ring-tailed_lemur', children: [] },
                                     { id: 'aye_aye', common: 'Aye-aye', sci: 'Daubentonia madagascariensis', era: 'present · endangered', desc: 'A highly unusual nocturnal lemur from Madagascar with a thin, elongated middle finger used to fish larvae out of tree bark.', extinct: false, wiki: 'Aye-aye', children: [] },
                                     { id: 'slow_loris', common: 'Slow loris', sci: 'Nycticebus coucang', era: 'present · vulnerable', desc: 'A slow-moving, nocturnal primate from Southeast Asia — one of the very few venomous mammals known.', extinct: false, wiki: 'Sunda_slow_loris', children: [] },
+                                  ],
+                                },
+                              ],
+                                },
+                                {
+                                  id: 'clade_rodentia',
+                                  common: 'Rodentia',
+                                  sci: 'Rodentia',
+                                  era: 'clade · rodents',
+                                  desc: 'The single largest mammal order — roughly 40% of all mammal species — unified by a pair of continuously growing incisors in each jaw.',
+                                  extinct: false,
+                                  clade: true,
+                                  wiki: 'Rodent',
+                                  children: [
+                                    { id: 'squirrel', common: 'Eastern gray squirrel', sci: 'Sciurus carolinensis', era: 'present', desc: 'A tree squirrel native to eastern North America, now widely introduced in Europe where it has displaced native red squirrels.', extinct: false, wiki: 'Eastern_gray_squirrel', children: [] },
+                                    { id: 'beaver', common: 'North American beaver', sci: 'Castor canadensis', era: 'present', desc: 'A large semi-aquatic rodent famous for building dams and lodges, dramatically reshaping the landscapes it inhabits.', extinct: false, wiki: 'North_American_beaver', children: [] },
+                                    { id: 'capybara', common: 'Capybara', sci: 'Hydrochoerus hydrochaeris', era: 'present', desc: 'The largest living rodent, a highly social, semi-aquatic mammal native to South America.', extinct: false, wiki: 'Capybara', children: [] },
+                                    { id: 'guinea_pig', common: 'Guinea pig', sci: 'Cavia porcellus', era: 'present', desc: 'A domesticated rodent descended from wild cavies in the Andes, kept worldwide as livestock, a pet, and a research animal.', extinct: false, wiki: 'Guinea_pig', children: [] },
+                                    { id: 'chinchilla_sp', common: 'Chinchilla', sci: 'Chinchilla lanigera', era: 'present · endangered', desc: 'A small rodent from the Andes with extraordinarily dense fur, historically hunted to near-extinction in the wild for that fur.', extinct: false, wiki: 'Long-tailed_chinchilla', children: [] },
                                   ],
                                 },
                               ],
@@ -479,6 +507,96 @@ export const tree = {
                                     { id: 'wolf', common: 'Gray wolf', sci: 'Canis lupus', era: 'present', desc: 'The largest wild canid, ancestor of the domestic dog, once the most widely distributed mammal in the world.', extinct: false, wiki: 'Wolf', children: [] },
                                   ],
                                 },
+                                {
+                                  id: 'clade_chiroptera',
+                                  common: 'Chiroptera',
+                                  sci: 'Chiroptera',
+                                  era: 'clade · bats',
+                                  desc: 'The second-largest mammal order and the only mammals capable of true, sustained flight.',
+                                  extinct: false,
+                                  clade: true,
+                                  wiki: 'Bat',
+                                  children: [
+                                    { id: 'straw_bat', common: 'Straw-coloured fruit bat', sci: 'Eidolon helvum', era: 'present · near threatened', desc: 'One of the most widely distributed fruit bats in Africa, forming some of the largest mammal migrations on Earth in colonies of millions.', extinct: false, wiki: 'Straw-coloured_fruit_bat', children: [] },
+                                    { id: 'vampire_bat', common: 'Common vampire bat', sci: 'Desmodus rotundus', era: 'present', desc: 'A small bat native to the Americas that feeds exclusively on the blood of other mammals, using heat-sensing pits to find blood vessels.', extinct: false, wiki: 'Common_vampire_bat', children: [] },
+                                    { id: 'jamaican_fruit_bat', common: 'Jamaican fruit bat', sci: 'Artibeus jamaicensis', era: 'present', desc: 'A widespread neotropical fruit bat and important seed disperser across Central America and the Caribbean.', extinct: false, wiki: 'Jamaican_fruit_bat', children: [] },
+                                  ],
+                                },
+                                {
+                                  id: 'clade_perissodactyla',
+                                  common: 'Perissodactyla',
+                                  sci: 'Perissodactyla',
+                                  era: 'clade · odd-toed ungulates',
+                                  desc: 'Hoofed mammals bearing their weight primarily on a single central toe — horses, rhinoceroses and tapirs are the only three living families.',
+                                  extinct: false,
+                                  clade: true,
+                                  wiki: 'Odd-toed_ungulate',
+                                  children: [
+                                    { id: 'grevy_zebra', common: "Grévy's zebra", sci: 'Equus grevyi', era: 'present · endangered', desc: 'The largest living wild equid, distinguished by its especially narrow stripes, found in Kenya and Ethiopia.', extinct: false, wiki: "Grévy's_zebra", children: [] },
+                                    { id: 'white_rhino', common: 'White rhinoceros', sci: 'Ceratotherium simum', era: 'present · near threatened', desc: 'The largest living rhinoceros species and the largest living odd-toed ungulate, native to southern and central Africa.', extinct: false, wiki: 'White_rhinoceros', children: [] },
+                                    { id: 'malayan_tapir', common: 'Malayan tapir', sci: 'Tapirus indicus', era: 'present · endangered', desc: 'The largest of the living tapir species and the only one native to Asia, easily recognised by its black-and-white colouring.', extinct: false, wiki: 'Malayan_tapir', children: [] },
+                                  ],
+                                },
+                                {
+                                  id: 'clade_artiodactyla_other',
+                                  common: 'Artiodactyla',
+                                  sci: 'Artiodactyla (non-cetacean)',
+                                  era: 'clade · even-toed ungulates',
+                                  desc: 'Hoofed mammals bearing weight evenly on two central toes — the same order that contains whales, but shown here are its land-dwelling members: giraffes, hippos, camels, deer and cattle.',
+                                  extinct: false,
+                                  clade: true,
+                                  wiki: 'Even-toed_ungulate',
+                                  children: [
+                                    { id: 'giraffe', common: 'Giraffe', sci: 'Giraffa camelopardalis', era: 'present · vulnerable', desc: 'The tallest living land animal, native to the savannas of Africa, with a neck used both for browsing and for combat between males.', extinct: false, wiki: 'Giraffe', children: [] },
+                                    { id: 'hippo', common: 'Hippopotamus', sci: 'Hippopotamus amphibius', era: 'present · vulnerable', desc: 'A large semi-aquatic mammal from sub-Saharan Africa and, genetically, the closest living land relative of whales.', extinct: false, wiki: 'Hippopotamus', children: [] },
+                                    { id: 'bactrian_camel', common: 'Bactrian camel', sci: 'Camelus bactrianus', era: 'present · endangered (wild)', desc: 'A two-humped camel native to the steppes of Central Asia, domesticated for thousands of years as a pack animal.', extinct: false, wiki: 'Bactrian_camel', children: [] },
+                                    { id: 'bison', common: 'American bison', sci: 'Bison bison', era: 'present · near threatened', desc: 'The largest land mammal in North America, reduced from tens of millions to near-extinction in the 19th century before a major conservation recovery.', extinct: false, wiki: 'American_bison', children: [] },
+                                    { id: 'reindeer', common: 'Reindeer', sci: 'Rangifer tarandus', era: 'present · vulnerable', desc: 'A deer species adapted to Arctic and subarctic climates, the only deer in which both sexes regularly grow antlers, and long domesticated in parts of its range.', extinct: false, wiki: 'Reindeer', children: [] },
+                                  ],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                        {
+                          id: 'clade_atlantogenata',
+                          common: 'Atlantogenata',
+                          sci: 'Atlantogenata',
+                          era: 'clade · ~100+ mya, largely Gondwanan origin',
+                          desc: 'A deep, distinct placental mammal lineage, sister to Boreoeutheria, uniting Afrotheria (elephants, manatees, hyraxes, aardvarks) and Xenarthra (sloths, armadillos, anteaters) — groups whose relatedness was only confirmed by molecular evidence, since they look nothing alike.',
+                          extinct: false,
+                          clade: true,
+                          wiki: 'Atlantogenata',
+                          children: [
+                            {
+                              id: 'clade_afrotheria',
+                              common: 'Afrotheria',
+                              sci: 'Afrotheria',
+                              era: 'clade · African-origin mammals',
+                              desc: 'A mammal superorder of largely African origin including elephants, manatees, hyraxes and aardvarks — animals with wildly different body plans united mainly by DNA evidence.',
+                              extinct: false,
+                              clade: true,
+                              wiki: 'Afrotheria',
+                              children: [
+                                { id: 'african_elephant', common: 'African elephant', sci: 'Loxodonta africana', era: 'present · endangered', desc: 'The largest living land animal, found across sub-Saharan Africa, with a highly complex social structure led by matriarchs.', extinct: false, wiki: 'African_elephant', children: [] },
+                                { id: 'dugong', common: 'Dugong', sci: 'Dugong dugon', era: 'present · vulnerable', desc: 'A large marine mammal found in warm coastal waters from East Africa to Australia, the only living member of its family.', extinct: false, wiki: 'Dugong', children: [] },
+                                { id: 'rock_hyrax', common: 'Rock hyrax', sci: 'Procavia capensis', era: 'present', desc: 'A small, rabbit-sized mammal found across Africa and the Middle East — despite its size, one of the closest living relatives of the elephant.', extinct: false, wiki: 'Rock_hyrax', children: [] },
+                                { id: 'aardvark', common: 'Aardvark', sci: 'Orycteropus afer', era: 'present', desc: 'A nocturnal, burrowing mammal from sub-Saharan Africa, the sole living species of its entire order, specialised for eating ants and termites.', extinct: false, wiki: 'Aardvark', children: [] },
+                              ],
+                            },
+                            {
+                              id: 'clade_xenarthra',
+                              common: 'Xenarthra',
+                              sci: 'Xenarthra',
+                              era: 'clade · sloths, armadillos & anteaters',
+                              desc: 'A distinct South American-origin mammal lineage named for extra joints ("xenarthrous" vertebrae) in the lower spine, found in no other mammal group.',
+                              extinct: false,
+                              clade: true,
+                              wiki: 'Xenarthra',
+                              children: [
+                                { id: 'giant_anteater', common: 'Giant anteater', sci: 'Myrmecophaga tridactyla', era: 'present · vulnerable', desc: 'A large, toothless insectivore from Central and South America with an elongated snout and tongue that can extend over 60 cm.', extinct: false, wiki: 'Giant_anteater', children: [] },
+                                { id: 'nine_banded_armadillo', common: 'Nine-banded armadillo', sci: 'Dasypus novemcinctus', era: 'present', desc: 'The most widespread armadillo species, ranging from South America into the southern United States, protected by a distinctive segmented bony shell.', extinct: false, wiki: 'Nine-banded_armadillo', children: [] },
+                                { id: 'two_toed_sloth', common: "Linnaeus's two-toed sloth", sci: 'Choloepus didactylus', era: 'present', desc: 'A slow-moving arboreal mammal from South America, so sedentary that algae often grows in its fur.', extinct: false, wiki: "Linnaeus's_two-toed_sloth", children: [] },
                               ],
                             },
                           ],
