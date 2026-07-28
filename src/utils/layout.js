@@ -62,3 +62,56 @@ export function collectDescendantIds(node, out = []) {
   }
   return out;
 }
+
+// ---------------------------------------------------------------
+// SEARCH SUPPORT
+// ---------------------------------------------------------------
+
+// Flatten the tree once into a list of { node, path } where path is the
+// array of ancestor ids from root to (and including) this node. Used for
+// both matching and for figuring out which nodes to expand.
+export function buildSearchIndex(root) {
+  const index = [];
+
+  function walk(node, path) {
+    const nextPath = [...path, node.id];
+    index.push({ node, path: nextPath });
+    if (node.children) {
+      for (const child of node.children) walk(child, nextPath);
+    }
+  }
+
+  walk(root, []);
+  return index;
+}
+
+// Very small fuzzy-ish matcher: scores common name / scientific name
+// matches, preferring exact matches, then "starts with", then "includes".
+// Skips clade/structural nodes so search always lands on an actual animal.
+export function findBestMatch(index, query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return null;
+
+  let best = null;
+  let bestScore = -Infinity;
+
+  for (const entry of index) {
+    const { node } = entry;
+    if (node.clade) continue; // only match real species/fossil nodes
+
+    const common = (node.common || '').toLowerCase();
+    const sci = (node.sci || '').toLowerCase();
+
+    let score = -Infinity;
+    if (common === q || sci === q) score = 100;
+    else if (common.startsWith(q) || sci.startsWith(q)) score = 80;
+    else if (common.includes(q) || sci.includes(q)) score = 60;
+
+    if (score > bestScore) {
+      bestScore = score;
+      best = entry;
+    }
+  }
+
+  return bestScore > -Infinity ? best : null;
+}

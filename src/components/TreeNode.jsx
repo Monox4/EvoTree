@@ -1,11 +1,11 @@
 import { NODE_W, NODE_H } from '../utils/layout';
 
-export default function TreeNode({ pos, onToggle, onHover, onMove, onLeave }) {
+export default function TreeNode({ pos, onToggle, onHover, onMove, onLeave, highlighted }) {
   const { node, x, y } = pos;
 
   const openWiki = (e) => {
     e.preventDefault();
-    if (node.clade && !node.wiki) return; // unresolved node — no page to link to
+    if (node.clade && !node.wiki) return;
     const title = node.wiki || node.sci.split(',')[0].trim().replace(/ /g, '_');
     window.open(`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`, '_blank', 'noopener');
   };
