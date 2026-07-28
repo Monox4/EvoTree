@@ -143,54 +143,77 @@ svg#lines {
 #legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--panel); border: 1px solid var(--line); }
 #legend i.dashed { border-style: dashed; background: #f4ecdd; }
 
+/* Search bar, top right */
 #search-bar {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: 20px;
+  right: 20px;
   z-index: 60;
+}
+
+#search-pill {
   display: flex;
   align-items: center;
-  background: var(--panel);
+  background: var(--bg2);
   border: 1px solid var(--line);
-  border-radius: 4px 12px 4px 12px;
-  box-shadow: 2px 3px 6px rgba(90, 60, 30, 0.2);
-  padding: 4px 4px 4px 12px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(90, 60, 30, 0.18);
+  padding: 11px 22px 11px 18px;
+  gap: 10px;
+  transition: box-shadow 0.15s, border-color 0.15s;
 }
-#search-bar input {
+
+#search-pill:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 3px 10px rgba(90, 60, 30, 0.28);
+}
+
+#search-pill button {
   border: none;
-  outline: none;
   background: transparent;
-  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
-  font-size: 13px;
-  color: var(--text);
-  width: 190px;
-  padding: 6px 0;
-}
-#search-bar input::placeholder { color: var(--muted); font-style: italic; }
-#search-bar button {
-  border: none;
-  background: var(--branch);
-  color: var(--panel);
-  width: 28px; height: 28px;
-  border-radius: 50%;
+  color: var(--branch);
+  padding: 0;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.15s;
 }
-#search-bar button:hover { background: var(--accent); }
+
+#search-pill input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+  font-size: 16.25px;
+  color: var(--text);
+  width: 237px;
+  padding: 3px 0;
+}
+
+#search-pill input::placeholder {
+  color: var(--branch);
+  opacity: 0.5;
+  font-style: italic;
+  transition: opacity 0.15s;
+}
+
+#search-pill input:focus::placeholder {
+  opacity: 0;
+}
+
 #search-no-match {
   position: absolute;
-  top: 44px;
+  top: 52px;
   right: 0;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--accent2);
   font-style: italic;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 4px 10px 4px 10px;
-  padding: 5px 10px;
+  padding: 6px 12px;
   white-space: nowrap;
 }
