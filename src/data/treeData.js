@@ -1,3 +1,21 @@
+// ---------------------------------------------------------------
+// DATA — hybrid sourcing:
+//   • Fossil/transitional "trunk" nodes (Tiktaalik, Ichthyostega,
+//     Eryops, Hylonomus, Dimetrodon, Morganucodon, Tyrannosaurus)
+//     are hand-curated from Wikipedia, since these precisely-dated
+//     transitional taxa aren't placed in Open Tree of Life's
+//     synthesis tree (OToL flags Tiktaalik itself as suppressed
+//     from synthesis — no confident phylogenetic placement yet).
+//   • Living-species branches (marked `clade: true` at their
+//     internal branch points) use REAL topology pulled from the
+//     Open Tree of Life API (tree_of_life/induced_subtree) for the
+//     11 living species in this tree, so those branchings reflect
+//     actual published phylogenetic literature rather than guesses.
+//   • Nodes labelled "Unknown ancestor" are real divergence points
+//     OToL's synthesis didn't assign a single formal clade name to.
+// This remains a curated illustrative tree, not an exhaustive
+// cladogram — see README for how to extend it further.
+// ---------------------------------------------------------------
 export const tree = {
   id: 'tiktaalik',
   common: 'Tiktaalik',
@@ -615,6 +633,7 @@ export const tree = {
                                         { id: 'lion', common: 'Lion', sci: 'Panthera leo', era: 'present · vulnerable', desc: 'A large carnivoran found mainly in sub-Saharan Africa, notable for its highly social pride structure.', extinct: false, wiki: 'Lion', children: [] },
                                         { id: 'tiger', common: 'Tiger', sci: 'Panthera tigris', era: 'present · endangered', desc: 'The largest living cat species, found across fragmented habitats from India to the Russian Far East.', extinct: false, wiki: 'Tiger', children: [] },
                                         { id: 'hyena', common: 'Spotted hyena', sci: 'Crocuta crocuta', era: 'present', desc: 'Despite resembling dogs, hyenas are feliforms — spotted hyenas are highly social apex predators across sub-Saharan Africa with some of the most powerful bites of any mammal.', extinct: false, wiki: 'Spotted_hyena', children: [] },
+                                        { id: 'domestic_cat', common: 'Domestic cat', sci: 'Felis catus', era: 'present · ~10,000 years domesticated', desc: 'Descended from the African wildcat, one of the most popular pets in the world, self-domesticated alongside early grain stores that attracted rodents.', extinct: false, wiki: 'Cat', children: [] },
                                         { id: 'snow_leopard', common: 'Snow leopard', sci: 'Panthera uncia', era: 'present · vulnerable', desc: "A big cat adapted to the high mountains of Central and South Asia, with an unusually long tail used for balance and warmth, unable to roar like other Panthera species.", extinct: false, wiki: 'Snow_leopard', children: [] },
                                         { id: 'puma', common: 'Puma', sci: 'Puma concolor', era: 'present', desc: 'Also called cougar or mountain lion, the most widely distributed wild land mammal in the Western Hemisphere, found from Canada to the southern Andes.', extinct: false, wiki: 'Cougar', children: [] },
                                         { id: 'cheetah', common: 'Cheetah', sci: 'Acinonyx jubatus', era: 'present · vulnerable', desc: 'The fastest land animal, capable of reaching around 100 km/h in short bursts, built with a lightweight frame and non-retractable claws for grip.', extinct: false, wiki: 'Cheetah', children: [] },
@@ -630,7 +649,9 @@ export const tree = {
                                       clade: true,
                                       wiki: 'Caniformia',
                                       children: [
-                                        { id: 'wolf', common: 'Gray wolf', sci: 'Canis lupus', era: 'present', desc: 'The largest wild canid, ancestor of the domestic dog, once the most widely distributed mammal in the world.', extinct: false, wiki: 'Wolf', children: [] },
+                                        { id: 'wolf', common: 'Gray wolf', sci: 'Canis lupus', era: 'present', desc: 'The largest wild canid, ancestor of the domestic dog, once the most widely distributed mammal in the world.', extinct: false, wiki: 'Wolf', children: [
+                                          { id: 'dog', common: 'Domestic dog', sci: 'Canis lupus familiaris', era: 'present · ~15,000+ years domesticated', desc: 'A subspecies of gray wolf domesticated by humans longer than any other animal, now the most morphologically diverse mammal species on Earth thanks to selective breeding.', extinct: false, wiki: 'Dog', children: [] },
+                                        ] },
                                         { id: 'red_fox', common: 'Red fox', sci: 'Vulpes vulpes', era: 'present', desc: 'The largest and most widely distributed fox species, found across the Northern Hemisphere and highly adaptable to human environments.', extinct: false, wiki: 'Red_fox', children: [] },
                                         { id: 'grizzly_bear', common: 'Grizzly bear', sci: 'Ursus arctos horribilis', era: 'present', desc: 'A large North American subspecies of brown bear, named for the grizzled, silver-tipped fur on its back and shoulders.', extinct: false, wiki: 'Grizzly_bear', children: [] },
                                         { id: 'panda', common: 'Giant panda', sci: 'Ailuropoda melanoleuca', era: 'present · vulnerable', desc: 'A bear species native to central China that evolved an almost entirely bamboo-based diet, along with a modified wrist bone used to grip stalks.', extinct: false, wiki: 'Giant_panda', children: [] },
