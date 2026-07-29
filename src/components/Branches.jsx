@@ -4,8 +4,6 @@ export default function Branches({ positions, width, height }) {
   const posMap = new Map(positions.map((p) => [p.node.id, p]));
 
   const anchorX = (p, side) => {
-    // Clade "dot" nodes anchor lines to their center; full cards anchor
-    // to their left (incoming) or right (outgoing) edge as before.
     if (p.node.clade) return p.x + NODE_W / 2;
     return side === 'in' ? p.x : p.x + NODE_W;
   };
@@ -20,7 +18,13 @@ export default function Branches({ positions, width, height }) {
       const y1 = p.y + NODE_H / 2;
       const x2 = anchorX(cp, 'in');
       const y2 = cp.y + NODE_H / 2;
-      const wob = seedWobble(child.id, 24);
+      // Scale the curve's bulge to how close this branch sits to its
+      // siblings vertically — a full-size wobble on a tightly packed
+      // clade (many children) would bow the curve into a neighbouring
+      // card, so we clamp it down proportionally to the vertical gap.
+      const vGap = Math.abs(y2 - y1);
+      const wobbleRange = Math.max(4, Math.min(24, vGap * 0.35));
+      const wob = seedWobble(child.id, wobbleRange);
       const midX = (x1 + x2) / 2;
 
       paths.push(

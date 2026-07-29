@@ -1,7 +1,7 @@
 export const NODE_W = 180;
 export const NODE_H = 64;
 export const X_GAP = 100;
-export const Y_GAP = 20;
+export const Y_GAP = 26;
 
 // Deterministic wobble so branches feel hand-drawn, not mechanical.
 export function seedWobble(id, range) {
