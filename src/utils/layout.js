@@ -100,12 +100,11 @@ export function findBestMatch(index, query) {
     if (node.clade) continue; // only match real species/fossil nodes
 
     const common = (node.common || '').toLowerCase();
-    const sci = (node.sci || '').toLowerCase();
 
     let score = -Infinity;
-    if (common === q || sci === q) score = 100;
-    else if (common.startsWith(q) || sci.startsWith(q)) score = 80;
-    else if (common.includes(q) || sci.includes(q)) score = 60;
+    if (common === q) score = 100;
+    else if (common.startsWith(q)) score = 80;
+    else if (common.includes(q)) score = 60;
 
     if (score > bestScore) {
       bestScore = score;

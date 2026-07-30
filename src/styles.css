@@ -57,6 +57,9 @@ svg#lines {
   box-shadow: 2px 3px 0 rgba(122, 86, 54, 0.25);
 }
 .node.extinct { border-style: dashed; background: #f4ecdd; }
+.node.expandable {
+  background: #f4ecdd;
+}
 
 .clade-dot-wrap {
   position: absolute;

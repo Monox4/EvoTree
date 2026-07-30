@@ -11,11 +11,10 @@ export default function TreeNode({ pos, onToggle, onHover, onMove, onLeave, high
   };
 
   if (node.clade) {
-    // Render as a small connector dot rather than a full card, but keep
-    // the same footprint (width/height) so branch-line math is unaffected.
     return (
       <div
-        className="clade-dot-wrap"
+        id={`node-${node.id}`}
+        className={`clade-dot-wrap${highlighted ? ' highlighted' : ''}`}
         style={{ left: x, top: y, width: NODE_W, height: NODE_H }}
         onClick={() => pos.hasChildren && onToggle(node.id)}
         onContextMenu={openWiki}
@@ -31,7 +30,8 @@ export default function TreeNode({ pos, onToggle, onHover, onMove, onLeave, high
 
   return (
     <div
-      className={`node${node.extinct ? ' extinct' : ''}`}
+      id={`node-${node.id}`}
+      className={`node${node.extinct ? ' extinct' : ''}${pos.hasChildren ? ' expandable' : ''}${highlighted ? ' highlighted' : ''}`}
       style={{ left: x, top: y, width: NODE_W }}
       onClick={() => pos.hasChildren && onToggle(node.id)}
       onContextMenu={openWiki}
