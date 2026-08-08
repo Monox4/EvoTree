@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { tree } from './data/treeData';
+import { nodes, ROOT_ID } from './data/treeData';
 import {
   layoutTree,
-  findNode,
   collectDescendantIds,
   buildSearchIndex,
   findBestMatch,
@@ -18,7 +17,7 @@ import Tooltip from './components/Tooltip';
 import SearchBar from './components/SearchBar';
 
 export default function App() {
-  const [expanded, setExpanded] = useState(new Set([tree.id]));
+  const [expanded, setExpanded] = useState(new Set([ROOT_ID]));
   const [hoveredNode, setHoveredNode] = useState(null);
   const [tooltipPos, setTooltipPos] = useState(null);
   const [highlightedId, setHighlightedId] = useState(null);
@@ -29,11 +28,12 @@ export default function App() {
 
   const { summary, loading, fetchSummary, clear } = useWikiSummary();
 
-  const positions = useMemo(() => layoutTree(tree, expanded), [expanded]);
-  const searchIndex = useMemo(() => buildSearchIndex(tree), []);
+  const positions = useMemo(() => layoutTree(nodes, ROOT_ID, expanded), [expanded]);
+  const searchIndex = useMemo(() => buildSearchIndex(nodes), []);
 
+  // Vertically center the root against the left wall.
   const viewportH = wrapRef.current?.clientHeight || window.innerHeight;
-  const root = positions.find((p) => p.node.id === tree.id);
+  const root = positions.find((p) => p.node.id === ROOT_ID);
   const offsetY = root ? viewportH / 2 - NODE_H / 2 - root.y : 0;
   let shifted = positions.map((p) => ({ ...p, y: p.y + offsetY }));
   const minY = Math.min(...shifted.map((p) => p.y));
@@ -52,8 +52,7 @@ export default function App() {
       const next = new Set(prev);
       if (next.has(id)) {
         next.delete(id);
-        const node = findNode(tree, id);
-        if (node) collectDescendantIds(node).forEach((cid) => next.delete(cid));
+        collectDescendantIds(nodes, id).forEach((cid) => next.delete(cid));
       } else {
         next.add(id);
       }
@@ -88,6 +87,7 @@ export default function App() {
     clear();
   };
 
+  // --- Search ---------------------------------------------------
   const handleSearch = (query) => {
     const match = findBestMatch(searchIndex, query);
     if (!match) return false;
@@ -155,8 +155,12 @@ export default function App() {
       <Tooltip node={hoveredNode} summary={summary} loading={loading} position={tooltipPos} />
 
       <div id="legend">
-        <span><i></i>living lineage</span>
-        <span><i className="dashed"></i>extinct lineage</span>
+        <span>
+          <i></i>living lineage
+        </span>
+        <span>
+          <i className="dashed"></i>extinct lineage
+        </span>
       </div>
     </>
   );
