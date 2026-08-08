@@ -26,6 +26,26 @@ export const tree = {
   wiki: 'Tiktaalik',
   children: [
     {
+      id: 'panderichthys',
+      common: 'Panderichthys',
+      sci: 'Panderichthys rhombolepis',
+      era: '~380–385 mya · Late Devonian',
+      desc: "A close relative of Tiktaalik, slightly more fish-like and generally considered slightly more basal in the fish-to-tetrapod transition rather than a literal descendant — shown here alongside Tiktaalik as a companion transitional form rather than strictly \"after\" it, since the tree's root is fixed at Tiktaalik.",
+      extinct: true,
+      wiki: 'Panderichthys',
+      children: [],
+    },
+    {
+      id: 'latimeria',
+      common: 'Coelacanth',
+      sci: 'Latimeria chalumnae',
+      era: 'present · critically endangered',
+      desc: "Not a tetrapod ancestor at all, but the closest living relative of the lobe-finned fish lineage that gave rise to tetrapods — the sister branch that stayed in the water. Long thought extinct until a living specimen was caught off South Africa in 1938, making it one of the most famous \"living fossils\" known.",
+      extinct: false,
+      wiki: 'Coelacanth',
+      children: [],
+    },
+    {
       id: 'ichthyostega',
       common: 'Ichthyostega',
       sci: 'Ichthyostega stensioei',
@@ -99,6 +119,16 @@ export const tree = {
           wiki: 'Hylonomus',
           children: [
             {
+              id: 'eunotosaurus',
+              common: 'Eunotosaurus',
+              sci: 'Eunotosaurus africanus',
+              era: '~260–252 mya · Late Permian',
+              desc: "A small reptile from South Africa with unusually broadened, overlapping ribs — increasingly regarded by palaeontologists as the earliest known step toward the turtle shell, making it a candidate stem-turtle roughly 260 million years before Testudines properly diversified. Placed here provisionally: it belongs to Parareptilia, a separate basal reptile lineage from Sauropsida's main branch, and its exact relationship to true turtles is still debated.",
+              extinct: true,
+              wiki: 'Eunotosaurus',
+              children: [],
+            },
+            {
               id: 'clade_sauropsida',
               common: 'Sauropsida',
               sci: 'Sauropsida',
@@ -108,6 +138,34 @@ export const tree = {
               clade: true,
               wiki: 'Sauropsida',
               children: [
+                {
+                  id: 'clade_rhynchosauria',
+                  common: 'Rhynchosauria',
+                  sci: 'Rhynchosauria',
+                  era: 'clade · beaked archosauromorphs',
+                  desc: 'Stocky, herbivorous archosauromorphs with a beaked upper jaw, briefly among the most abundant land animals of the Triassic before vanishing entirely — a sibling order to Archosauria itself, confirmed via Wikidata to share the same parent taxon rather than being nested inside Archosauria.',
+                  extinct: true,
+                  clade: true,
+                  wiki: 'Rhynchosauria',
+                  children: [
+                    { id: 'hyperodapedon', common: 'Hyperodapedon', sci: 'Hyperodapedon gordoni', era: '~228 mya · Late Triassic', desc: 'A rhynchosaur, a group of stocky, beaked herbivorous reptiles that were briefly among the most abundant land animals of the Triassic before disappearing entirely — a lineage with no living descendants.', extinct: true, wiki: 'Hyperodapedon', children: [] },
+                  ],
+                },
+                {
+                  id: 'clade_prolacertiformes',
+                  common: 'Prolacertiformes',
+                  sci: 'Prolacertiformes',
+                  era: 'clade · protorosaurs',
+                  desc: 'Another sibling order to Archosauria within Archosauromorpha, sharing the same parent taxon as Rhynchosauria per Wikidata — includes some of the most anatomically bizarre reptiles of the Triassic.',
+                  extinct: true,
+                  clade: true,
+                  wiki: 'Protorosauria',
+                  children: [
+                    { id: 'tanystropheus', common: 'Tanystropheus', sci: 'Tanystropheus hydroides', era: '~242 mya · Middle Triassic', desc: "A basal archosauromorph, not a true archosaur, with an extraordinarily long neck made of just 13 elongated vertebrae — nearly three times the length of its body.", extinct: true, wiki: 'Tanystropheus', children: [] },
+                    { id: 'longisquama', common: 'Longisquama', sci: 'Longisquama insignis', era: '~242 mya · Middle Triassic', desc: 'A small, basal archosauromorph reptile bearing a row of long, paired appendages down its back, of uncertain function — possibly display, possibly an early gliding structure unrelated to true wings.', extinct: true, wiki: 'Longisquama', children: [] },
+                    { id: 'sharovipteryx', common: 'Sharovipteryx', sci: 'Sharovipteryx mirabilis', era: '~242 mya · Middle Triassic', desc: 'A gliding reptile that evolved its membrane on its hind limbs rather than its forelimbs — a genuinely unique flight-adjacent body plan among reptiles, and not a pterosaur despite superficial resemblance. Classified within Podopterygidae, part of Prolacertiformes/Protorosauria.', extinct: true, wiki: 'Sharovipteryx', children: [] },
+                  ],
+                },
                 {
                   id: 'clade_archelosauria',
                   common: 'Archelosauria',
@@ -128,10 +186,6 @@ export const tree = {
                       clade: true,
                       wiki: 'Archosaur',
                       children: [
-                        { id: 'tanystropheus', common: 'Tanystropheus', sci: 'Tanystropheus hydroides', era: '~242 mya · Middle Triassic', desc: "A basal archosauromorph, not a true archosaur, with an extraordinarily long neck made of just 13 elongated vertebrae — nearly three times the length of its body.", extinct: true, wiki: 'Tanystropheus', children: [] },
-                        { id: 'longisquama', common: 'Longisquama', sci: 'Longisquama insignis', era: '~242 mya · Middle Triassic', desc: 'A small, basal archosauromorph reptile bearing a row of long, paired appendages down its back, of uncertain function — possibly display, possibly an early gliding structure unrelated to true wings.', extinct: true, wiki: 'Longisquama', children: [] },
-                        { id: 'sharovipteryx', common: 'Sharovipteryx', sci: 'Sharovipteryx mirabilis', era: '~242 mya · Middle Triassic', desc: 'A gliding reptile that evolved its membrane on its hind limbs rather than its forelimbs — a genuinely unique flight-adjacent body plan among reptiles, and not a pterosaur despite superficial resemblance.', extinct: true, wiki: 'Sharovipteryx', children: [] },
-                        { id: 'hyperodapedon', common: 'Hyperodapedon', sci: 'Hyperodapedon gordoni', era: '~228 mya · Late Triassic', desc: 'A rhynchosaur, a group of stocky, beaked herbivorous reptiles that were briefly among the most abundant land animals of the Triassic before disappearing entirely — a lineage with no living descendants.', extinct: true, wiki: 'Hyperodapedon', children: [] },
                         {
                           id: 'clade_pseudosuchia',
                           common: 'Pseudosuchia',
@@ -789,6 +843,69 @@ export const tree = {
               wiki: 'Dimetrodon',
               children: [
                 {
+                  id: 'estemmenosuchus',
+                  common: 'Estemmenosuchus',
+                  sci: 'Estemmenosuchus mirabilis',
+                  era: '~267–252 mya · Late Permian',
+                  desc: 'An early therapsid bearing bizarre bony horns on its skull, likely used for display or combat, showing the surprising diversity synapsids explored well before mammals existed.',
+                  extinct: true,
+                  wiki: 'Estemmenosuchus',
+                  children: [
+                    {
+                      id: 'titanophoneus',
+                      common: 'Titanophoneus',
+                      sci: 'Titanophoneus potens',
+                      era: '~267–252 mya · Late Permian',
+                      desc: 'A large predatory therapsid, among the top predators of its ecosystem, with a build more mammal-like than reptilian despite still being far from true mammals.',
+                      extinct: true,
+                      wiki: 'Titanophoneus',
+                      children: [
+                        {
+                          id: 'moschops',
+                          common: 'Moschops',
+                          sci: 'Moschops capensis',
+                          era: '~265–260 mya · Late Permian',
+                          desc: 'A heavily built herbivorous therapsid with a notably thick skull roof, possibly used in head-to-head combat between rivals.',
+                          extinct: true,
+                          wiki: 'Moschops',
+                          children: [
+                            {
+                              id: 'gorgonops',
+                              common: 'Gorgonops',
+                              sci: 'Gorgonops torvus',
+                              era: '~260–254 mya · Late Permian',
+                              desc: 'A large, sabre-toothed predatory therapsid representative of the gorgonopsians, the dominant land predators of the Late Permian, all of which vanished in the end-Permian mass extinction.',
+                              extinct: true,
+                              wiki: 'Gorgonops',
+                              children: [
+                                {
+                                  id: 'lystrosaurus',
+                                  common: 'Lystrosaurus',
+                                  sci: 'Lystrosaurus murrayi',
+                                  era: '~252–247 mya · Early Triassic',
+                                  desc: "One of the few large land animals to survive the end-Permian mass extinction, the deadliest in Earth's history — for a time afterward, Lystrosaurus made up the vast majority of known land vertebrate fossils.",
+                                  extinct: true,
+                                  wiki: 'Lystrosaurus',
+                                  children: [
+                                    {
+                                      id: 'placerias',
+                                      common: 'Placerias',
+                                      sci: 'Placerias hesternus',
+                                      era: '~221–205 mya · Late Triassic',
+                                      desc: 'A large, tusked dicynodont — a distant cousin of Lystrosaurus surviving tens of millions of years later, among the last of a once-dominant herbivore lineage before dicynodonts disappeared entirely.',
+                                      extinct: true,
+                                      wiki: 'Placerias',
+                                      children: [
+                                        {
+                                          id: 'thrinaxodon',
+                                          common: 'Thrinaxodon',
+                                          sci: 'Thrinaxodon liorhinus',
+                                          era: '~251–247 mya · Early Triassic',
+                                          desc: 'A small cynodont therapsid remarkably close to true mammals — likely whiskered, possibly warm-blooded, and bearing differentiated teeth much like a modern mammal\u2019s.',
+                                          extinct: true,
+                                          wiki: 'Thrinaxodon',
+                                          children: [
+                {
                   id: 'morganucodon',
                   common: 'Morganucodon',
                   sci: 'Morganucodon watsoni',
@@ -1280,4 +1397,18 @@ export const tree = {
       ],
     },
   ],
-};
+  },
+  ],
+  },
+  ],
+  },
+  ],
+  },
+  ],
+  },
+  ],
+  },
+  ],
+  },
+  ],
+  };
