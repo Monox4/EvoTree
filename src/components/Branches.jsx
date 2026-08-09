@@ -9,35 +9,35 @@ export default function Branches({ positions, width, height }) {
   };
 
   const paths = [];
-  positions.forEach((p) => {
-    if (!p.isOpen || !p.node.children) return;
-    p.node.children.forEach((child) => {
-      const cp = posMap.get(child.id);
-      if (!cp) return;
-      const x1 = anchorX(p, 'out');
-      const y1 = p.y + NODE_H / 2;
-      const x2 = anchorX(cp, 'in');
-      const y2 = cp.y + NODE_H / 2;
-      const vGap = Math.abs(y2 - y1);
-      const wobbleRange = Math.max(4, Math.min(24, vGap * 0.35));
-      const wob = seedWobble(child.id, wobbleRange);
-      const midX = (x1 + x2) / 2;
+  positions.forEach((cp) => {
+    const parentId = cp.node.parentId;
+    if (parentId == null) return; // root has no incoming branch
+    const p = posMap.get(parentId);
+    if (!p) return; // parent not currently rendered (shouldn't happen, but be safe)
 
-      paths.push(
-        <path
-          key={`path-${child.id}`}
-          d={`M${x1},${y1} C${midX + wob},${y1} ${midX - wob},${y2} ${x2},${y2}`}
-          stroke={child.extinct ? '#a3907a' : '#7a5636'}
-          strokeWidth={child.extinct ? 1.6 : 2.2}
-          strokeLinecap="round"
-          fill="none"
-          strokeDasharray={child.extinct ? '5 4' : undefined}
-        />
-      );
-      paths.push(
-        <circle key={`twig-${child.id}`} cx={x1} cy={y1} r={2.5} fill="#7a5636" />
-      );
-    });
+    const x1 = anchorX(p, 'out');
+    const y1 = p.y + NODE_H / 2;
+    const x2 = anchorX(cp, 'in');
+    const y2 = cp.y + NODE_H / 2;
+    const vGap = Math.abs(y2 - y1);
+    const wobbleRange = Math.max(4, Math.min(24, vGap * 0.35));
+    const wob = seedWobble(cp.node.id, wobbleRange);
+    const midX = (x1 + x2) / 2;
+
+    paths.push(
+      <path
+        key={`path-${cp.node.id}`}
+        d={`M${x1},${y1} C${midX + wob},${y1} ${midX - wob},${y2} ${x2},${y2}`}
+        stroke={cp.node.extinct ? '#a3907a' : '#7a5636'}
+        strokeWidth={cp.node.extinct ? 1.6 : 2.2}
+        strokeLinecap="round"
+        fill="none"
+        strokeDasharray={cp.node.extinct ? '5 4' : undefined}
+      />
+    );
+    paths.push(
+      <circle key={`twig-${cp.node.id}`} cx={x1} cy={y1} r={2.5} fill="#7a5636" />
+    );
   });
 
   return (
