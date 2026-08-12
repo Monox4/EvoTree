@@ -1,10 +1,9 @@
 import { useCallback, useRef, useState } from 'react';
 
-// Module-level cache persists across component instances/renders.
 const wikiCache = new Map();
 
 export function useWikiSummary() {
-  const [summary, setSummary] = useState(null); // { title, extract, thumbnail }
+  const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(false);
   const tokenRef = useRef(0);
 
@@ -21,15 +20,10 @@ export function useWikiSummary() {
     setSummary(null);
 
     try {
-      const res = await fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`
-      );
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
       if (!res.ok) throw new Error('not found');
       const data = await res.json();
-      const parsed = {
-        extract: data.extract,
-        thumbnail: data.thumbnail?.source || null,
-      };
+      const parsed = { extract: data.extract, thumbnail: data.thumbnail?.source || null };
       wikiCache.set(title, parsed);
       if (myToken === tokenRef.current) {
         setSummary(parsed);

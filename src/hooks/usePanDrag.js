@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-// Attach drag-to-pan behaviour to a scrollable ref. Ignores drags that
-// start on an element carrying the given ignoreSelector (e.g. '.node').
 export function usePanDrag(ref, ignoreSelector = '.node') {
   const state = useRef({ isDown: false, startX: 0, startY: 0, scrollL: 0, scrollT: 0 });
 

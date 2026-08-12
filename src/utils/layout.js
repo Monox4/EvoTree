@@ -1,30 +1,20 @@
 export const NODE_W = 180;
 export const NODE_H = 64;
-export const X_GAP = 100;
-export const Y_GAP = 26;
+export const X_GAP = 120;
+export const Y_GAP = 32;
 
-// Deterministic wobble so branches feel hand-drawn, not mechanical.
 export function seedWobble(id, range) {
   let h = 0;
   for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 1000;
   return (h / 1000 - 0.5) * range;
 }
 
-// ---------------------------------------------------------------
-// FLAT-DATA HELPERS
-// ---------------------------------------------------------------
-// The data file is a flat array of { id, parentId, ... } records.
-// Everything below rebuilds tree-shaped views of that data on the
-// fly, so the underlying file never needs nested structure.
-
-// Map id -> node, for O(1) lookup.
 export function buildNodeIndex(nodes) {
   const map = new Map();
   for (const n of nodes) map.set(n.id, n);
   return map;
 }
 
-// Map parentId -> array of child nodes, preserving source array order.
 export function buildChildIndex(nodes) {
   const map = new Map();
   for (const n of nodes) {
@@ -39,7 +29,6 @@ export function findNode(nodes, id) {
   return nodes.find((n) => n.id === id) || null;
 }
 
-// All descendant ids of a given node (not including itself).
 export function collectDescendantIds(nodes, id, childIndex) {
   const idx = childIndex || buildChildIndex(nodes);
   const out = [];
@@ -53,9 +42,6 @@ export function collectDescendantIds(nodes, id, childIndex) {
   return out;
 }
 
-// Recursively compute { node, x, y, depth, hasChildren, isOpen } for every
-// visible node, given a Set of expanded node ids. Walks the flat array via
-// the child index instead of a nested `children` field.
 export function layoutTree(nodes, rootId, expanded) {
   const childIndex = buildChildIndex(nodes);
   const nodeIndex = buildNodeIndex(nodes);
@@ -92,17 +78,9 @@ export function layoutTree(nodes, rootId, expanded) {
   return positions;
 }
 
-// ---------------------------------------------------------------
-// SEARCH SUPPORT
-// ---------------------------------------------------------------
-
-// Flatten into a list of { node, path } where path is the array of
-// ancestor ids from root to (and including) this node — built by
-// walking parentId pointers upward, then reversing.
 export function buildSearchIndex(nodes) {
   const nodeIndex = buildNodeIndex(nodes);
   const index = [];
-
   for (const node of nodes) {
     const path = [];
     let current = node;
@@ -112,36 +90,26 @@ export function buildSearchIndex(nodes) {
     }
     index.push({ node, path });
   }
-
   return index;
 }
 
-// Very small fuzzy-ish matcher: scores common-name matches, preferring
-// exact matches, then "starts with", then "includes". Skips clade nodes
-// so search always lands on an actual animal.
 export function findBestMatch(index, query) {
   const q = query.trim().toLowerCase();
   if (!q) return null;
-
   let best = null;
   let bestScore = -Infinity;
-
   for (const entry of index) {
     const { node } = entry;
     if (node.clade) continue;
-
     const common = (node.common || '').toLowerCase();
-
     let score = -Infinity;
     if (common === q) score = 100;
     else if (common.startsWith(q)) score = 80;
     else if (common.includes(q)) score = 60;
-
     if (score > bestScore) {
       bestScore = score;
       best = entry;
     }
   }
-
   return bestScore > -Infinity ? best : null;
 }

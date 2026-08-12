@@ -11,16 +11,16 @@ export default function Branches({ positions, width, height }) {
   const paths = [];
   positions.forEach((cp) => {
     const parentId = cp.node.parentId;
-    if (parentId == null) return; // root has no incoming branch
+    if (parentId == null) return;
     const p = posMap.get(parentId);
-    if (!p) return; // parent not currently rendered (shouldn't happen, but be safe)
+    if (!p) return;
 
     const x1 = anchorX(p, 'out');
     const y1 = p.y + NODE_H / 2;
     const x2 = anchorX(cp, 'in');
     const y2 = cp.y + NODE_H / 2;
     const vGap = Math.abs(y2 - y1);
-    const wobbleRange = Math.max(4, Math.min(24, vGap * 0.35));
+    const wobbleRange = Math.max(3, Math.min(14, vGap * 0.22));
     const wob = seedWobble(cp.node.id, wobbleRange);
     const midX = (x1 + x2) / 2;
 
@@ -35,9 +35,7 @@ export default function Branches({ positions, width, height }) {
         strokeDasharray={cp.node.extinct ? '5 4' : undefined}
       />
     );
-    paths.push(
-      <circle key={`twig-${cp.node.id}`} cx={x1} cy={y1} r={2.5} fill="#7a5636" />
-    );
+    paths.push(<circle key={`twig-${cp.node.id}`} cx={x1} cy={y1} r={2.5} fill="#7a5636" />);
   });
 
   return (

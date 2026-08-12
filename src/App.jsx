@@ -31,7 +31,6 @@ export default function App() {
   const positions = useMemo(() => layoutTree(nodes, ROOT_ID, expanded), [expanded]);
   const searchIndex = useMemo(() => buildSearchIndex(nodes), []);
 
-  // Vertically center the root against the left wall.
   const viewportH = wrapRef.current?.clientHeight || window.innerHeight;
   const root = positions.find((p) => p.node.id === ROOT_ID);
   const offsetY = root ? viewportH / 2 - NODE_H / 2 - root.y : 0;
@@ -87,17 +86,14 @@ export default function App() {
     clear();
   };
 
-  // --- Search ---------------------------------------------------
   const handleSearch = (query) => {
     const match = findBestMatch(searchIndex, query);
     if (!match) return false;
-
     setExpanded((prev) => {
       const next = new Set(prev);
       match.path.forEach((id) => next.add(id));
       return next;
     });
-
     setHighlightedId(match.node.id);
     return true;
   };
@@ -118,12 +114,8 @@ export default function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-
       <div id="canvas-wrap" ref={wrapRef}>
-        <div
-          id="zoom-spacer"
-          style={{ width: canvasW * zoom, height: canvasH * zoom, position: 'relative' }}
-        >
+        <div id="zoom-spacer" style={{ width: canvasW * zoom, height: canvasH * zoom, position: 'relative' }}>
           <div
             id="canvas"
             style={{
@@ -151,16 +143,10 @@ export default function App() {
           </div>
         </div>
       </div>
-
       <Tooltip node={hoveredNode} summary={summary} loading={loading} position={tooltipPos} />
-
       <div id="legend">
-        <span>
-          <i></i>living lineage
-        </span>
-        <span>
-          <i className="dashed"></i>extinct lineage
-        </span>
+        <span><i></i>living lineage</span>
+        <span><i className="dashed"></i>extinct lineage</span>
       </div>
     </>
   );

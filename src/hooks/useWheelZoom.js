@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-// Binds the mouse wheel to zoom in/out on the given scrollable container,
-// instead of the browser's native page zoom. Zoom is anchored to the
-// cursor position so the point under the mouse stays put while zooming.
 export function useWheelZoom(ref, { min = 0.35, max = 2.5, step = 0.0015 } = {}) {
   const [zoom, setZoom] = useState(1);
   const zoomRef = useRef(zoom);
@@ -14,7 +11,6 @@ export function useWheelZoom(ref, { min = 0.35, max = 2.5, step = 0.0015 } = {})
 
     const onWheel = (e) => {
       e.preventDefault();
-
       const prevZoom = zoomRef.current;
       const delta = -e.deltaY * step * prevZoom;
       let nextZoom = prevZoom + delta;
