@@ -56,9 +56,13 @@ svg#lines {
   transform: translateY(-1px);
   box-shadow: 2px 3px 0 rgba(122, 86, 54, 0.25);
 }
-.node.extinct { border-style: dashed; background: #f4ecdd; }
+.node.extinct {
+  background: var(--bg);
+}
+
 .node.expandable {
-  background: #f4ecdd;
+  border-style: dotted;
+  border-width: 1.5px;
 }
 
 .clade-dot-wrap {
@@ -144,8 +148,9 @@ svg#lines {
 }
 #legend span { display: inline-flex; align-items: center; gap: 5px; margin-right: 12px; }
 #legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--panel); border: 1px solid var(--line); }
-#legend i.dashed { border-style: dashed; background: #f4ecdd; }
-
+#legend i.dashed {
+  background: var(--bg);
+}
 /* Search bar, top right */
 #search-bar {
   position: fixed;
