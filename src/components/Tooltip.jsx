@@ -1,8 +1,17 @@
-export default function Tooltip({ node, summary, loading, position }) {
+export default function Tooltip({ node, summary, loading, position, onOpenWiki, touchMode }) {
   if (!node || !position) return null;
 
+  const handleTap = () => {
+    if (!touchMode || !node.wiki) return;
+    onOpenWiki?.(node);
+  };
+
   return (
-    <div className="tooltip" style={{ left: position.x, top: position.y }}>
+    <div
+      className={`tooltip${touchMode ? ' touch' : ''}`}
+      style={{ left: position.x, top: position.y }}
+      onClick={handleTap}
+    >
       {loading && <div className="tt-loading">Loading {node.common}…</div>}
 
       {!loading && (
@@ -14,9 +23,11 @@ export default function Tooltip({ node, summary, loading, position }) {
             <strong>{node.common}</strong>
             <br />
             {node.desc}
-            <span className="tt-source">
-              {node.wiki ? 'Right-click to read more on Wikipedia' : ''}
-            </span>
+            {node.wiki && (
+              <span className="tt-source">
+                {touchMode ? 'Tap here to read more on Wikipedia' : 'Right-click to read more on Wikipedia'}
+              </span>
+            )}
           </div>
         </>
       )}
